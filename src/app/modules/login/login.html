@@ -1,0 +1,202 @@
+<div class="login-page">
+  <div class="login-background">
+    <div class="login-shape login-shape-1"></div>
+    <div class="login-shape login-shape-2"></div>
+    <div class="login-shape login-shape-3"></div>
+  </div>
+
+  <div class="login-container">
+    <p-card styleClass="login-card" [style]="{ overflow: 'visible' }">
+      <ng-template pTemplate="header">
+        <div class="login-card-header">
+          <span class="login-logo">
+            <i class="pi pi-building" aria-hidden="true"></i>
+          </span>
+          <h1 class="login-title">Casa do Zé</h1>
+          <p class="login-subtitle">Gerenciamento</p>
+        </div>
+      </ng-template>
+
+      <div class="auth-curtain">
+        <div
+          class="auth-panels"
+          [style.transform]="showLogin() ? 'translateX(0)' : 'translateX(-50%)'"
+        >
+          <!-- Painel: Login -->
+          <div class="auth-panel">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+              <div class="auth-field">
+                <p-floatlabel variant="over">
+                  <input
+                    pInputText
+                    id="email"
+                    type="email"
+                    formControlName="email"
+                    variant="outlined"
+                    fluid
+                    autocomplete="email"
+                    placeholder=" "
+                  />
+                  <label for="email">E-mail</label>
+                </p-floatlabel>
+                @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+                  <small class="p-error">Informe um e-mail válido.</small>
+                }
+              </div>
+
+              <div class="auth-field">
+                <p-floatlabel variant="over">
+                  <p-password
+                    formControlName="password"
+                    [feedback]="false"
+                    [toggleMask]="true"
+                    inputId="password"
+                    variant="outlined"
+                    fluid
+                    styleClass="auth-password auth-password-float"
+                    inputStyleClass="w-full"
+                    placeholder=" "
+                  />
+                  <label for="password">Senha</label>
+                </p-floatlabel>
+                @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                  <small class="p-error">Informe sua senha.</small>
+                }
+              </div>
+
+              <div class="auth-options">
+                <div class="auth-remember">
+                  <p-checkbox
+                    formControlName="remember"
+                    [binary]="true"
+                    inputId="remember"
+                    ariaLabel="Lembrar-me"
+                  />
+                  <label for="remember" class="auth-remember-label">Lembrar-me</label>
+                </div>
+                <a href="#" class="auth-link" (click)="$event.preventDefault()">Esqueci a senha</a>
+              </div>
+
+              <p-button
+                type="submit"
+                label="Entrar"
+                icon="pi pi-sign-in"
+                iconPos="right"
+                [loading]="loading()"
+                [disabled]="loginForm.invalid"
+                styleClass="auth-button"
+              />
+
+              <p class="auth-switch">
+                Não tem conta?
+                <button type="button" class="auth-switch-btn" (click)="goToCadastro()">
+                  Criar conta
+                </button>
+              </p>
+            </form>
+          </div>
+
+          <!-- Painel: Cadastro -->
+          <div class="auth-panel">
+            <form [formGroup]="cadastroForm" (ngSubmit)="onSubmitCadastro()" class="auth-form">
+              <div class="auth-field">
+                <p-floatlabel variant="over">
+                  <input
+                    pInputText
+                    id="cadastro-name"
+                    type="text"
+                    formControlName="name"
+                    variant="outlined"
+                    fluid
+                    autocomplete="name"
+                    placeholder=" "
+                  />
+                  <label for="cadastro-name">Nome</label>
+                </p-floatlabel>
+                @if (cadastroForm.get('name')?.invalid && cadastroForm.get('name')?.touched) {
+                  <small class="p-error">Informe seu nome.</small>
+                }
+              </div>
+
+              <div class="auth-field">
+                <p-floatlabel variant="over">
+                  <input
+                    pInputText
+                    id="cadastro-email"
+                    type="email"
+                    formControlName="email"
+                    variant="outlined"
+                    fluid
+                    autocomplete="email"
+                    placeholder=" "
+                  />
+                  <label for="cadastro-email">E-mail</label>
+                </p-floatlabel>
+                @if (cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched) {
+                  <small class="p-error">Informe um e-mail válido.</small>
+                }
+              </div>
+
+              <div class="auth-field">
+                <p-floatlabel variant="over">
+                  <p-password
+                    formControlName="password"
+                    [feedback]="false"
+                    [toggleMask]="true"
+                    inputId="cadastro-password"
+                    variant="outlined"
+                    fluid
+                    styleClass="auth-password auth-password-float"
+                    inputStyleClass="w-full"
+                    placeholder=" "
+                  />
+                  <label for="cadastro-password">Senha</label>
+                </p-floatlabel>
+                @if (cadastroForm.get('password')?.invalid && cadastroForm.get('password')?.touched) {
+                  <small class="p-error">Mínimo 6 caracteres.</small>
+                }
+              </div>
+
+              <div class="auth-field">
+                <p-floatlabel variant="over">
+                  <p-password
+                    formControlName="confirmPassword"
+                    [feedback]="false"
+                    [toggleMask]="true"
+                    inputId="confirmPassword"
+                    variant="outlined"
+                    fluid
+                    styleClass="auth-password auth-password-float"
+                    inputStyleClass="w-full"
+                    placeholder=" "
+                  />
+                  <label for="confirmPassword">Confirmar senha</label>
+                </p-floatlabel>
+                @if (cadastroForm.hasError('senhasDiferentes') && cadastroForm.get('confirmPassword')?.touched) {
+                  <small class="p-error">As senhas não coincidem.</small>
+                }
+              </div>
+
+              <p-button
+                type="submit"
+                label="Cadastrar"
+                icon="pi pi-user-plus"
+                iconPos="right"
+                [loading]="loadingCadastro()"
+                [disabled]="cadastroForm.invalid"
+                styleClass="auth-button"
+              />
+
+              <p class="auth-switch">
+                Já tem conta?
+                <button type="button" class="auth-switch-btn" (click)="goToLogin()">
+                  Entrar
+                </button>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>
