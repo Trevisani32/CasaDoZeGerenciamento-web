@@ -2,7 +2,6 @@
 .layout {
   --top-bar-height: 56px;
   --side-bar-width: 240px;
-  min-height: 100vh;
   position: relative;
 }
 
@@ -22,7 +21,7 @@
   border: none;
   border-radius: 0;
   border-bottom: 1px solid var(--p-surface-200);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px var(--p-surface-200);
 }
 
 .top-bar ::ng-deep .p-menubar .p-menubar-root-list {
@@ -33,6 +32,26 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.top-bar-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--p-text-color);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.top-bar-menu-btn:hover {
+  background: var(--p-surface-100);
+  color: var(--p-primary-600);
 }
 
 .top-bar-logo {
@@ -92,7 +111,7 @@
   z-index: 999;
   overflow-y: auto;
   border-right: 1px solid var(--p-surface-200);
-  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 1px 0 3px var(--p-surface-200);
 }
 
 .side-bar .layout-side-menu,
@@ -105,7 +124,8 @@
 }
 
 .side-bar ::ng-deep .p-menu-list {
-  padding: 1rem 0.75rem;
+  padding: 1rem 0.5rem;
+  gap: 0.5rem;
 }
 
 .side-bar ::ng-deep .p-menuitem-link.router-link-active {
@@ -113,11 +133,27 @@
   color: var(--p-primary-700);
 }
 
-/* Área de conteúdo: deslocada pela top bar e side bar */
+/* Side bar recolhida */
+.side-bar {
+  transition: transform 0.2s ease, width 0.2s ease, opacity 0.2s ease;
+}
+
+.side-bar.is-hidden {
+  transform: translateX(calc(-1 * var(--side-bar-width)));
+  pointer-events: none;
+  opacity: 0;
+}
+
+.layout.side-bar-hidden .layout-content {
+  margin-left: 0;
+  transition: margin-left 0.2s ease;
+}
+
+/* Área de conteúdo: deslocada pela top bar e side bar.
+Sem min-height para não gerar scroll quando o conteúdo é pouco. */
 .layout-content {
   margin-top: var(--top-bar-height);
   margin-left: var(--side-bar-width);
-  min-height: calc(100vh - var(--top-bar-height));
   padding: 1.5rem 2rem;
   background: var(--p-surface-50);
 }

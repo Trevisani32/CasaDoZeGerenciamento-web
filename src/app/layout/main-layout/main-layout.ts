@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Menubar } from 'primeng/menubar';
 import { Menu } from 'primeng/menu';
@@ -8,12 +9,17 @@ import type { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterLink, Menubar, Menu, PrimeTemplate, RouterOutlet],
+  imports: [NgClass, RouterLink, Menubar, Menu, PrimeTemplate, RouterOutlet],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })
 export class MainLayout {
   topMenuItems: MenuItem[] = [];
+  sideBarVisible = true;
+
+  toggleSideBar(): void {
+    this.sideBarVisible = !this.sideBarVisible;
+  }
 
   sideMenuItems: MenuItem[] = [
     { label: 'Dashboard', icon: 'pi pi-home', routerLink: '/dashboard' },

@@ -1,12 +1,14 @@
-<div class="layout">
+<div class="layout" [class.side-bar-hidden]="!sideBarVisible">
   <header class="top-bar">
     <p-menubar [model]="topMenuItems" styleClass="layout-menubar">
       <ng-template pTemplate="start">
+        <button type="button" class="top-bar-menu-btn" (click)="toggleSideBar()" [attr.aria-label]="sideBarVisible ? 'Ocultar menu' : 'Mostrar menu'">
+          <i class="pi" [ngClass]="sideBarVisible ? 'pi-chevron-left' : 'pi-chevron-right'"></i>
+        </button>
         <span class="top-bar-logo" aria-hidden="true">
           <i class="pi pi-building"></i>
         </span>
         <span class="top-bar-title">Casa do Zé</span>
-        <span class="top-bar-subtitle">Gerenciamento</span>
       </ng-template>
       <ng-template pTemplate="end">
         <a routerLink="/login" class="top-bar-link">
@@ -17,7 +19,7 @@
     </p-menubar>
   </header>
 
-  <aside class="side-bar">
+  <aside class="side-bar" [class.is-hidden]="!sideBarVisible">
     <p-menu [model]="sideMenuItems" [popup]="false" styleClass="layout-side-menu" />
   </aside>
 
