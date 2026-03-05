@@ -1,0 +1,147 @@
+/* Variáveis para manter consistência e facilitar ajustes */
+.layout {
+  --top-bar-height: 56px;
+  --side-bar-width: 240px;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Top bar: fixa no topo, Menubar do PrimeNG */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--top-bar-height);
+  z-index: 1000;
+}
+
+.top-bar .layout-menubar,
+.top-bar ::ng-deep .p-menubar {
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--p-surface-200);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.top-bar ::ng-deep .p-menubar .p-menubar-root-list {
+  flex: 1;
+}
+
+.top-bar ::ng-deep .p-menubar-start {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.top-bar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--p-primary-100);
+  color: var(--p-primary-600);
+  font-size: 1.25rem;
+}
+
+.top-bar-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--p-text-color);
+}
+
+.top-bar-subtitle {
+  font-size: 0.8125rem;
+  color: var(--p-text-muted-color);
+  margin-left: 0.25rem;
+}
+
+.top-bar ::ng-deep .p-menubar-end {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: var(--p-text-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.top-bar-link:hover {
+  background: var(--p-surface-100);
+  color: var(--p-primary-600);
+}
+
+/* Side bar: fixa à esquerda, Menu do PrimeNG (inline) */
+.side-bar {
+  position: fixed;
+  top: var(--top-bar-height);
+  left: 0;
+  width: var(--side-bar-width);
+  bottom: 0;
+  z-index: 999;
+  overflow-y: auto;
+  border-right: 1px solid var(--p-surface-200);
+  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.04);
+}
+
+.side-bar .layout-side-menu,
+.side-bar ::ng-deep .p-menu {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  background: var(--p-surface-0);
+}
+
+.side-bar ::ng-deep .p-menu-list {
+  padding: 1rem 0.75rem;
+}
+
+.side-bar ::ng-deep .p-menuitem-link.router-link-active {
+  background: var(--p-primary-50);
+  color: var(--p-primary-700);
+}
+
+/* Área de conteúdo: deslocada pela top bar e side bar */
+.layout-content {
+  margin-top: var(--top-bar-height);
+  margin-left: var(--side-bar-width);
+  min-height: calc(100vh - var(--top-bar-height));
+  padding: 1.5rem 2rem;
+  background: var(--p-surface-50);
+}
+
+/* Em telas pequenas */
+@media (max-width: 768px) {
+  .layout {
+    --side-bar-width: 64px;
+  }
+
+  .side-bar ::ng-deep .p-menuitem-text {
+    display: none;
+  }
+
+  .side-bar ::ng-deep .p-menuitem-link {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .top-bar-subtitle {
+    display: none;
+  }
+
+  .layout-content {
+    padding: 1rem;
+  }
+}

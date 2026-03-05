@@ -1,35 +1,29 @@
-.dashboard-page {
+.page {
   min-height: 100%;
 }
 
-.dashboard-header {
+.page-header {
   margin-bottom: 2rem;
 }
 
-.dashboard-title {
+.page-title {
   margin: 0;
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--p-text-color);
 }
 
-.dashboard-subtitle {
+.page-subtitle {
   margin: 0.25rem 0 0;
   font-size: 0.9375rem;
   color: var(--p-text-muted-color);
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.dashboard-card {
+.page-card {
   min-height: 120px;
 }
 
-.dashboard-placeholder {
+.page-placeholder {
   margin: 0;
   color: var(--p-text-muted-color);
   font-size: 0.9375rem;

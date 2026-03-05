@@ -52,8 +52,8 @@ export class Login {
     private router: Router
   ) {
     this.loginForm = this.fb.nonNullable.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      email: ['usuario@teste.com', [Validators.required, Validators.email]],
+      password: ['123456', Validators.required],
       remember: [false],
     });
 
