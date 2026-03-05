@@ -115,20 +115,32 @@
 }
 
 .side-bar .layout-side-menu,
-.side-bar ::ng-deep .p-menu {
+.side-bar ::ng-deep .p-panelmenu {
   width: 100%;
-  height: 100%;
   border: none;
   border-radius: 0;
   background: var(--p-surface-0);
 }
 
-.side-bar ::ng-deep .p-menu-list {
-  padding: 1rem 0.5rem;
-  gap: 0.5rem;
+.side-bar ::ng-deep .p-panelmenu-panel {
+  border: none;
+  border-bottom: 1px solid var(--p-surface-200);
 }
 
-.side-bar ::ng-deep .p-menuitem-link.router-link-active {
+.side-bar ::ng-deep .p-panelmenu-header-content {
+  border-radius: 0;
+  border: none;
+  background: var(--p-surface-0);
+  padding-left: 0.2rem;
+  padding-right: 0.5rem;
+}
+
+.side-bar ::ng-deep .p-panelmenu-content {
+  border: none;
+  padding-left: 3rem;
+}
+
+.side-bar ::ng-deep .p-panelmenu .p-menuitem-link.router-link-active {
   background: var(--p-primary-50);
   color: var(--p-primary-700);
 }
@@ -180,4 +192,17 @@ Sem min-height para não gerar scroll quando o conteúdo é pouco. */
   .layout-content {
     padding: 1rem;
   }
+}
+
+/* Zera indentação estrutural do UL */
+.side-bar ::ng-deep .p-panelmenu .p-submenu-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+.side-bar ::ng-deep .p-panelmenu ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
 }

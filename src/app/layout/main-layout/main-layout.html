@@ -3,7 +3,7 @@
     <p-menubar [model]="topMenuItems" styleClass="layout-menubar">
       <ng-template pTemplate="start">
         <button type="button" class="top-bar-menu-btn" (click)="toggleSideBar()" [attr.aria-label]="sideBarVisible ? 'Ocultar menu' : 'Mostrar menu'">
-          <i class="pi" [ngClass]="sideBarVisible ? 'pi-chevron-left' : 'pi-chevron-right'"></i>
+          <i class="pi" [ngClass]="sideBarVisible ? 'pi-angle-left' : 'pi-angle-right'"></i>
         </button>
         <span class="top-bar-logo" aria-hidden="true">
           <i class="pi pi-building"></i>
@@ -20,7 +20,7 @@
   </header>
 
   <aside class="side-bar" [class.is-hidden]="!sideBarVisible">
-    <p-menu [model]="sideMenuItems" [popup]="false" styleClass="layout-side-menu" />
+    <p-panelMenu [model]="sideMenuItems" styleClass="layout-side-menu" />
   </aside>
 
   <main class="layout-content">
